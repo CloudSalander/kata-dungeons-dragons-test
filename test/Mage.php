@@ -12,12 +12,12 @@ class Mage extends Player {
         }
     }
 
-    public function useSpell(string $spell): void {
+    public function useSpell(string $spell): string {
         if(in_array($spell,$this->spells)) {
-            echo $this->nickname." used ".$spell."!".PHP_EOL;
+            return $this->nickname." used ".$spell."!".PHP_EOL;
         }
         else {
-            echo $this->nickname." doesn't know ".$spell."!".PHP_EOL;
+            return $this->nickname." doesn't know ".$spell."!".PHP_EOL;
         }
     }
 }

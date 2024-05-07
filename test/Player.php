@@ -8,7 +8,7 @@ enum MoveDirection: string {
 }
 
 abstract class Player {
-    protected string $nickname;
+    public string $nickname;
     protected int $pos_x;
     protected int $pos_y;
     //TODO: This ones are more a "Board" responsability but we don't have Board by now.
@@ -58,6 +58,10 @@ abstract class Player {
     
     public function getY(): int {
         return $this->pos_y;
+    }
+
+    public function getNickname(): string {
+        return $this->nickname;
     }
 }
 
