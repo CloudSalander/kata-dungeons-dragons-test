@@ -11,8 +11,12 @@ class Warrior extends Player {
         echo $this->nickname." attacked with ".$this->sword.PHP_EOL;
     }
 
-    public function run(MoveDirection $direction): void {
-        $this->move($direction,2);
+    public function run(MoveDirection $direction): string {
+        return $this->move($direction,2);
+    }
+
+    public function getSword(): string {
+        return $this->sword;
     }
 }
 

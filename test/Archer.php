@@ -17,6 +17,14 @@ class Archer extends Player {
         }
         else echo "Can't shoot! No arrows!".PHP_EOL;
     }
+
+    public function getArrowsQty(): int {
+        return $this->arrows_qty;
+    }
+
+    public function getBow(): string {
+        return $this->bow;
+    }
 }
 
 ?>

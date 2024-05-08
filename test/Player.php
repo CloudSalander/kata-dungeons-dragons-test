@@ -27,16 +27,15 @@ abstract class Player {
         $this->move($direction,1);
     }
 
-    protected function move(MoveDirection $direction, int $step): void {
+    protected function move(MoveDirection $direction, int $step): string {
         if($this->checkMoveUp($direction,$step)) $this->pos_y += $step;
         else if($this->checkMoveDown($direction,$step)) $this->pos_y -= $step;
         else if($this->checkMoveRight($direction,$step)) $this->pos_x += $step;
         else if($this->checkMoveLeft($direction,$step)) $this->pos_x -= $step;
         else {
-            echo "Can't move on ".$direction->value." direction!".PHP_EOL;
-            return;
+            return "Can't move on ".$direction->value." direction!".PHP_EOL;
         }
-        echo $this->nickname." now its in X: ".$this->pos_x." and Y: ".$this->pos_y.PHP_EOL;
+        return $this->nickname." now its in X: ".$this->pos_x." and Y: ".$this->pos_y.PHP_EOL;
     }
 
     private function checkMoveUp(MoveDirection $direction, int $step): bool {
