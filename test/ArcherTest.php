@@ -17,17 +17,35 @@ class ArcherTest extends TestCase {
     public function testHasNickname(): void
     {
         $nickname = $this->archer->getNickname(); 
+        $this->assertTrue(isset($nickname));
+        $this->assertTrue($nickname != "");
     }
 
-    public function testUseRightSpell(): void {
-        $this->mage->addSpell($this->sample_spell);
-        $expected_msg = $this->mage->getNickname()." used ".$this->sample_spell."!".PHP_EOL;
-        $this->assertEquals($this->mage->useSpell($this->sample_spell),$expected_msg);
+    public function testHasBow(): void {
+        $bow = $this->archer->getBow(); 
+        $this->assertTrue(isset($bow));
+        $this->assertTrue($bow != "");
     }
 
-    public function testUseWrongSpell(): void {
-        $expected_msg = $this->mage->getNickname()." doesn't know ".$this->wrong_spell."!".PHP_EOL;
-        $this->assertEquals($this->mage->useSpell($this->wrong_spell),$expected_msg);
+    public function testCanShoot(): void {
+        $arrow_qty = $this->archer->getArrowsQty();
+        $this->archer->shoot();
+        $this->assertSame($arrow_qty-1,$this->archer->getArrowsQty());
     }
 
+    public function testRunningOutArrows(): void {
+        $this->shootAllArrows();
+        ob_start();
+        $this->archer->shoot();
+        $output = ob_get_clean();
+        $expectedOutput = "Can't shoot! No arrows!".PHP_EOL;
+        $this->assertEquals($expectedOutput, $output);
+    }
+    
+    private function shootAllArrows(): void {
+        $arrows_qty = $this->archer->getArrowsQty();
+        for($i = 0; $i < $arrows_qty; ++$i) {
+            $this->archer->shoot();
+        }
+    }
 }
